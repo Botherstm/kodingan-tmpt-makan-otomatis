@@ -1,0 +1,34 @@
+//BOTHERS_TM
+
+#define BLYNK_PRINT Serial
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+#include <Servo.h>
+
+Servo servo;
+
+char auth[]="";//kode author dari aplikasi blink di hp
+char ssid[]="";//nama wifi 
+char pass[]="";//password wifi 
+
+void setup()
+
+{
+  Serial.begin(9600);
+  Blynk.begin(auth,ssid,pass);
+  servo.attach(15); //di node mcu itu pin D8
+  
+}
+
+void loop()
+
+{
+  Blynk.run();
+  
+}
+
+BLYNK_WRITE(V1)
+
+{
+  servo.write(param.asInt());
+}
